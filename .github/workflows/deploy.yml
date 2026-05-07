@@ -29,3 +29,4 @@ jobs:
           environment_name: vocabulary-env
           region: eu-north-1
           deployment_package: target/vocabulary-0.0.1-SNAPSHOT.jar
+          version_label: "deploy-${{ github.sha }}"
