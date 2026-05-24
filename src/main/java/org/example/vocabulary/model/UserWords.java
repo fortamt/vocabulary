@@ -1,4 +1,4 @@
 package org.example.vocabulary.model;
 
-public class Word {
+public class UserWords {
 }
