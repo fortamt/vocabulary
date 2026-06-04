@@ -1,33 +1,51 @@
 package org.example.vocabulary.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "words")
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "words")
 public class Word {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String word;
+    @NotBlank
+    private String ru;
 
-    @Column(nullable = false)
-    private String translation;
+    @NotBlank
+    private String en;
 
-    @Column(nullable = false)
-    private Integer level = 0;
+    @NotBlank
+    private String enTranscription;
 
-    public Word(String word, String translation) {
-        this.word = word;
-        this.translation = translation;
-        this.level = 0;
+    @OneToMany(mappedBy = "word")
+    Set<UserWord> userWords = new HashSet<>();
+
+    @ManyToMany(mappedBy = "words")
+    Set<ListOfWords> listOfWords = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Word word)) return false;
+        return Objects.equals(id, word.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
