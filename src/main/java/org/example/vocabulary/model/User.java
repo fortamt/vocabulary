@@ -44,8 +44,8 @@ public class User {
 //    @OneToMany
 //    private Set<Achievement> achievements = new HashSet<>(); todo
 
-    @OneToMany(mappedBy = "user") //ManyToMany implemented with join entity
-    private Set<UserWords> userWords = new HashSet<>();
+    @OneToMany(mappedBy = "user")
+    private Set<UserWord> userWords = new HashSet<>();
 
 //    @Column(nullable = false) todo
 //    private int xp = 0;
@@ -55,7 +55,7 @@ public class User {
     private int dailyGoal = 5;
 
 //    remainder todo
-//    reflink todo
+//    ref_link todo
 //    premium todo
 
     @CreationTimestamp
